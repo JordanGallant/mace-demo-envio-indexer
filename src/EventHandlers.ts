@@ -6,27 +6,6 @@ import {
   IDexRouter_SwapCompleted,
 } from "generated";
 
-
-const createOrUpdateGlobalStats = async (fields: any, context: any) => {
-  let globalStats = await context.GlobalStats.get("global");
-
-  if (!globalStats) {
-    globalStats = {
-      id: "global",
-      inputToken: "", // assumed to be 1 if not set, should have an event emitted on initialization
-    };
-  }
-
-  // Update only the fields that exist in the event object
-  for (const key in fields) {
-    if (fields[key] !== undefined && key in globalStats) {
-      globalStats[key] = fields[key];
-    }
-  }
-
-  await context.GlobalStats.set(globalStats);
-};
-
 IDexRouter.SwapCompleted.handler(async ({ event, context }) => {
 
   let {inputToken, amountIn, outputToken, amountOut} = event.params;
@@ -76,8 +55,6 @@ IDexRouter.SwapCompleted.handler(async ({ event, context }) => {
 
 
   context.IDexRouter_SwapCompleted.set(entity);
-  await createOrUpdateGlobalStats({inputToken: event.params.inputToken}, context);
-
 });
 
 //Swaps

@@ -1,7 +1,4 @@
-type GlobalStats {
-  id: ID! # singleton - "global"
-  inputToken: String!  
-}
+
 
 type Token {
   id: ID! # tokenAddress
