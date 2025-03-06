@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=./node_modules/envio/evm.schema.json
-name: nadfun
+name: mace
 networks:
 - id: 10143
   start_block: 0
